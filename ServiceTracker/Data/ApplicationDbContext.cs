@@ -15,12 +15,14 @@ namespace ServiceTracker.Data
         {
         }
 
+        public DbSet<Service> Services { get; set; }
+        public DbSet<BusinessType> BusinessTypes { get; set; }
+        public DbSet<BusinessService> BusinessServices { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
+            builder.Entity<BusinessService>().HasKey(k => new {k.BusinessTypeId, k.ServiceId});
         }
     }
 }
